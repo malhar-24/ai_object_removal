@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Process Image - AI Object Removal</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <div class="container">
+    <h1>Process Your Image</h1>
+    <div class="image-box">
+      <img src="{{ image_url }}" alt="Uploaded Image">
+    </div>
+    <form method="POST">
+      {% csrf_token %}
+      <input type="text" name="prompt" placeholder="Enter prompt here...(Specify the object features)" class="prompt-input">
+      <button type="submit" class="remove-btn">Remove</button>
+    </form>
+  </div>
+</body>
+</html>

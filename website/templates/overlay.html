@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Overlay Result</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    .preview {
+      max-width: 600px;
+      border: 2px solid #ccc;
+      cursor: crosshair;
+    }
+    .points {
+      margin-top: 10px;
+      font-family: monospace;
+      background: #000000;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Overlay Result</h1>
+
+    <div class="image-box">
+      <img id="clickable-image" src="{{ overlay_url }}" alt="Overlay Image" class="preview">
+    </div>
+
+    <div class="points">
+      <h3>Clicked Points:</h3>
+      <ul id="points-list"></ul>
+    </div>
+    <br><br>
+
+    <form action="{% url 'options_page' %}">
+      <button type="submit" class="submit-btn">Next</button>
+    </form>
+  </div>
+
+<script>
+  const img = document.getElementById("clickable-image");
+  const pointsList = document.getElementById("points-list");
+  let points = [];
+
+  img.addEventListener("click", function(event) {
+    const rect = img.getBoundingClientRect();
+    const x = Math.round(event.clientX - rect.left);
+    const y = Math.round(event.clientY - rect.top);
+
+    points.push({x, y});
+
+    // Show on UI
+    const li = document.createElement("li");
+    li.textContent = `(${x}, ${y})`;
+    pointsList.appendChild(li);
+
+    // Send to backend
+    fetch("{% url 'store_points' %}", {
+      method: "POST",
+      headers: {
+        "X-CSRFToken": "{{ csrf_token }}",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ points: points })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === "ok") {
+        // Reload page to update overlay image
+        window.location.reload();
+      } else {
+        alert("Error: " + data.message);
+      }
+    })
+    .catch(error => {
+      console.error("Fetch error:", error);
+    });
+  });
+</script>
+
+</body>
+</html>

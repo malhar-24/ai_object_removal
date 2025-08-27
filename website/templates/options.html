@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Options - AI Image Edit</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    .download-btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+    .download-btn:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Choose an Operation</h1>
+
+    <div class="image-box">
+      <img src="{{ overlay_url }}" alt="Overlay Image">
+    </div>
+
+    <form method="POST">
+      {% csrf_token %}
+      <button class="submit-btn" type="submit" name="action" value="remove">Remove</button>
+      <button class="submit-btn" type="submit" name="action" value="blur">Blur</button>
+      <button class="submit-btn" type="submit" name="action" value="square">Square Blur</button>
+      <button class="submit-btn" type="submit" name="action" value="bw_square">B/W Square Blur</button>
+    </form>
+
+    {% if result_url %}
+      <h2>Result:</h2>
+      <div class="image-box">
+        <img src="{{ result_url }}" alt="Result Image">
+      </div>
+
+      <!-- ✅ Download Button -->
+      <a href="{{ result_url }}" download class="download-btn">Download Image</a>
+    {% endif %}
+  </div>
+</body>
+</html>

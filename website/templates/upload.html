@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upload Image - AI Object Removal</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <div class="container">
+    <h1>AI Object Removal</h1>
+    <p>Upload an image to get started</p>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <label class="upload-btn">
+        Select Image
+        <input type="file" name="image" accept="image/*" required>
+      </label>
+      <br><br>
+      <button type="submit" class="submit-btn">Upload</button>
+    </form>
+  </div>
+</body>
+</html>

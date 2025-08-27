@@ -1,0 +1,76 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(90deg, #1f1c2c, #928dab);
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 500px;
+  margin: 80px auto;
+  background: rgba(255,255,255,0.1);
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+h1 {
+  margin-bottom: 15px;
+  font-size: 28px;
+}
+
+p {
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.upload-btn {
+  display: inline-block;
+  background: #ff9800;
+  padding: 12px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.upload-btn:hover {
+  background: #e68a00;
+}
+
+.submit-btn, .remove-btn {
+  display: inline-block;
+  background: #2196F3;
+  padding: 12px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  color: white;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.submit-btn:hover, .remove-btn:hover {
+  background: #1976D2;
+}
+
+.image-box {
+  margin: 20px 0;
+}
+
+.image-box img {
+  max-width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.prompt-input {
+  width: 80%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  margin: 15px 0;
+  font-size: 16px;
+}
